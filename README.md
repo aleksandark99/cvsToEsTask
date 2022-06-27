@@ -9,7 +9,7 @@ To run the project follow these steps
 
 * run elastisearch on port 9200
 ```
-docker run --name es01 --net elastic -p 9200:9200 -it docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+docker run --name elasticsearch1 -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.6.2
 ```
 
 * build project using maven in the root of the project:

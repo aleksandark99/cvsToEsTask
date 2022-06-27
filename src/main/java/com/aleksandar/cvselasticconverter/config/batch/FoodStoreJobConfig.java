@@ -3,7 +3,6 @@ package com.aleksandar.cvselasticconverter.config.batch;
 import com.aleksandar.cvselasticconverter.model.dto.FoodStore;
 import com.aleksandar.cvselasticconverter.model.es.FoodStoreDoc;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -12,12 +11,10 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.data.elasticsearch.client.reactive.ReactiveElasticsearchClient;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @Configuration
@@ -33,6 +30,7 @@ public class FoodStoreJobConfig {
                 .start(fromFileIntoDataBase())
                 .build();
     }
+
     @Bean
     public Step fromFileIntoDataBase(){
         return stepBuilderFactory.get("fromFileIntoDatabase")

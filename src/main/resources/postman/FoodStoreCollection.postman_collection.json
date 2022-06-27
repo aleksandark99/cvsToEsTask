@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "8505213c-27bc-423b-a313-ed0448271ab7",
+		"name": "FoodStoreCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9200/test/_search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"size\": 1,                              \r\n  \"sort\" : [\r\n    {\r\n      \"_geo_distance\" : {\r\n          \"location\" : [42.826614,-75.544146],  \r\n          \"order\" : \"asc\",                  \r\n          \"mode\" : \"avg\",\r\n          \"unit\" : \"km\",\r\n          \"distance_type\" : \"arc\",\r\n          \"ignore_unmapped\": true\r\n      }\r\n    }\r\n  ],\r\n  \"query\" : {\r\n    \"match_all\" : {}\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/test/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"test",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9200/test/_search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"query_string\": {\r\n      \"query\": \"GF*\",\r\n      \"default_field\": \"dbaName\"\r\n    }\r\n  }\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/test/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"test",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/food-stores?latitude=-75.544146&longitude=42.826614",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/food-stores?latitude=-75.544146&longitude=42.826614",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"food-stores"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "-75.544146"
+						},
+						{
+							"key": "longitude",
+							"value": "42.826614"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/food-stores/search?nameOrAddress=609",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/food-stores/search?nameOrAddress=EXPRESS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"food-stores",
+						"search"
+					],
+					"query": [
+						{
+							"key": "nameOrAddress",
+							"value": "EXPRESS"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
