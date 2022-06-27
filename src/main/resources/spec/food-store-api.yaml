@@ -1,0 +1,73 @@
+openapi: "3.0.3"
+info:
+  title: food-store-api
+  version: 1.0.0
+paths:
+  /food-stores/search:
+    get:
+      description: Search for food stores with similar name or address
+      operationId: getTheClosestFoodStoreByNameOrAddress
+      parameters:
+        - in: query
+          name: nameOrAddress
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: "Food stores that match criteria are returned"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOfFoodStores'
+  /food-stores:
+    get:
+      description: Search for closest food store
+      operationId: getTheClosestFoodStore
+      parameters:
+        - in: query
+          name: latitude
+          schema:
+            type: double
+          required: true
+        - in: query
+          name: longitude
+          schema:
+            type: double
+          required: true
+      responses:
+        '200':
+          description: "Food stores that match criteria are returned"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodStore'
+        '404':
+          description: No Product returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    ListOfFoodStores:
+      type: array
+      items:
+        $ref: '#/components/schemas/FoodStore'
+
+    FoodStore:
+      type: object
+      properties:
+        country:
+          type: string
+        licenseNumber:
+          type: integer
+        entityName:
+          type: String
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
